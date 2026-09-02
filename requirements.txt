@@ -1,0 +1,4 @@
+# This file lists the dependencies for the project. You can install them using pip
+requests>=2.31
+python-dotenv>=1.2
+pandas>=3.0

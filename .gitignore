@@ -1,0 +1,10 @@
+# Ignore the virtual environment configuration and compiled Python files
+.env
+venv/
+__pycache__/
+*.pyc
+
+# Ignore the data extracts, but keep the .gitkeep file to ensure the directory exists
+data/extracts/*.json
+!data/extracts/.gitkeep
+data/reports/*.csv
