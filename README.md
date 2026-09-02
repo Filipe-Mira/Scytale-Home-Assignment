@@ -111,11 +111,6 @@ Both output folders are git-ignored (kept via `.gitkeep`) since their contents a
 - **Rate limiting**: not handled beyond GitHub's normal per-token quota (5,000 requests/hour). The worker cap (`MAX_WORKERS = 15`) is deliberately conservative to stay clear of GitHub's separate secondary/abuse rate limit, but there's no retry-on-429 logic.
 - **Failed requests**: if a PR's requests fail (network error, rate limit), that PR is logged, skipped, and reported in a warning at the end rather than aborting the whole run — a single failure shouldn't discard several minutes of already-fetched work. The affected PRs are simply absent from that run's report.
 
-## Testing
-
-No automated tests are included. `transform.py` is the highest-value target for adding them, since it's pure logic with no network calls — `compute_cr_passed`/`compute_checks_passed` can be tested directly against hand-built fixtures.
-
-This matters more than it might look: against the sample repo, all 160 `CHECKS_PASSED=False` results come from the "no checks reported" rule and **none** from an actual check failure. That means the failure-detection half of `compute_checks_passed` has never executed against real data, and fixtures are the only practical way to verify it. `extract.py` would need its HTTP calls mocked (e.g. `unittest.mock` or `responses`) rather than hitting the live API.
 
 ## A note from me
 
