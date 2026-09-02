@@ -10,7 +10,7 @@ Built for the Scytale Junior Data Engineer home assignment, against repositories
 2. **Transform** — for each merged PR, decides whether it was approved by at least one reviewer (`CR_Passed`) and whether its reported checks all passed (`CHECKS_PASSED`), then builds the final report rows.
 3. **Load** — `main.py` orchestrates both steps and writes the raw extract to `data/extracts/` and the final report to `data/reports/`.
 
-Each merged PR needs three extra API calls (reviews, commit status, check runs) on top of the initial listing — roughly 800 requests for a repo with 270 merged PRs. Those are fetched concurrently across a bounded thread pool (`MAX_WORKERS = 15`), since the work is I/O-bound: almost all the time is spent waiting on GitHub rather than doing computation.
+Each merged PR needs three extra API calls (reviews, commit status, check runs) on top of the initial listing - roughly 800 requests for a repo with 270 merged PRs. Those are fetched concurrently across a bounded thread pool (`MAX_WORKERS = 15`), since the work is I/O-bound: almost all the time is spent waiting on GitHub rather than doing computation.
 
 ## Project structure
 
